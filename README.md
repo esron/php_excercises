@@ -1,8 +1,8 @@
-# PHP Excercises
+# PHP Exercises
 
 In this repository I'm gonna implement some design principles and good practices with PHP.
 
-In the first version I'll not use any framework or lybrary, only the default functions in PHP.
+In the first version I'll not use any framework or library, only the default functions in PHP.
 
 Feel free to post an Issue if you think that something is not right.
 
