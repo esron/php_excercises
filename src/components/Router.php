@@ -8,6 +8,7 @@ use Handlers\Handler;
 use Handlers\Login;
 use Handlers\Logout;
 use Handlers\Profile;
+use Handlers\Support;
 
 class Router
 {
@@ -20,6 +21,8 @@ class Router
                 return new Profile();
             case '/logout':
                 return new Logout();
+            case '/support':
+                return new Support();
             case '/':
                 return null;
             default:
