@@ -19,3 +19,7 @@ php -S localhost:8080
 ### v1.0
 
 In version v1.0 I've implemented a simple login/logout flow. The main aspects there are presented in this version are separation of responsibilities, correct level of abstraction, user input sanitization and output scaping.
+
+### v1.1
+
+In this version I've implemented a simple support view with a form and the message history. This version emphasis form validation and session manipulation, including protection with CSRF token and user access level validation.
