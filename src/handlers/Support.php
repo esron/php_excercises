@@ -20,7 +20,7 @@ class Support extends Handler
             $formName    = $_POST['name']    ?? '';
             $formEmail   = $_POST['email']   ?? '';
             $formMessage = $_POST['message'] ?? '';
-            var_dump($_POST['name']);
+
             if ($formName === '') {
                 $formError = array_merge($formError, ['name' => 'Please tell us your name']);
             }
