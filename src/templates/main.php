@@ -44,13 +44,13 @@
             echo $content;
         } else { ?>
             <div class="jumbotron">
-                <h1 class="display-4">Hello, world!</h1>
+                <h1 class="display-4">Hello!</h1>
                 <p class="lead">
-                    This is the main layout, loaded from <code><?php echo __DIR__ . '/main.php'; ?></code>
+                    <a href="/signup">Sign up</a> to start creating your contacts list.
                 </p>
-                <div class="alert alert-warning">
-                    No content was provided for main layout.
-                </div>
+                <p>
+                    Already have an account? <a href="/login">Login here</a>.
+                </p>
             </div>
         <?php } ?>
     </main>
