@@ -14,7 +14,7 @@ require_once __DIR__ . '/../src/handlers/Support.php';
 $mainTemplate = new \Components\Template('main');
 
 $templateData = [
-    'title' => 'My main template',
+    'title' => 'PHP Exercises',
 ];
 
 $router = new \Components\Router();
