@@ -10,6 +10,7 @@ require_once __DIR__ . '/../src/handlers/Login.php';
 require_once __DIR__ . '/../src/handlers/Logout.php';
 require_once __DIR__ . '/../src/handlers/Profile.php';
 require_once __DIR__ . '/../src/handlers/Support.php';
+require_once __DIR__ . '/../src/handlers/SignUp.php';
 
 $mainTemplate = new \Components\Template('main');
 
