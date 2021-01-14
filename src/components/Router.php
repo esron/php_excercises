@@ -9,6 +9,7 @@ use Handlers\Login;
 use Handlers\Logout;
 use Handlers\Profile;
 use Handlers\Support;
+use Handlers\SignUp;
 
 class Router
 {
@@ -17,6 +18,8 @@ class Router
         switch ($_SERVER['PATH_INFO'] ?? '/') {
             case '/login':
                 return new Login();
+            case '/signup':
+                return new SignUp();
             case '/profile':
                 return new Profile();
             case '/logout':
