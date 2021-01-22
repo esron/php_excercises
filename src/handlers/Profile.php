@@ -14,7 +14,8 @@ class Profile extends Handler
 
         return (new \Components\Template('profile'))->render([
             'username' => $_SESSION['username'],
-            'sessionData' => var_export($_SESSION, true)
+            'signUpDate' => $_SESSION['loginTime'],
+            'loginTime' => $_SESSION['loginTime'],
         ]);
     }
 
