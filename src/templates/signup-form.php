@@ -34,8 +34,6 @@
 
         <button type="submit" class="btn btn-lg btn-primary btn-block">Sign Up</button>
 
-        <p>
-            Already have an account? <a href="/login">Login here</a>.
-        </p>
+        <p class="mt-3">Already have an account? <a href="/login">Login here</a>.</p>
     </form>
 </div>

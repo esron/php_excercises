@@ -24,5 +24,7 @@
         </div>
 
         <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+
+        <p class="mt-3">No account? <a href="/signup">Sign up here</a></p>
     </form>
 </div>
