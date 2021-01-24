@@ -12,15 +12,16 @@
 
         <div class="collapse navbar-collapse show">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
                 <?php if (isset($_SESSION['username'])) { ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/profile">Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/support">Support</a>
+                    </li>
+                <?php } else { ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
                     </li>
                 <?php } ?>
             </ul>
