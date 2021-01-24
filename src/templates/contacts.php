@@ -4,7 +4,24 @@
 <section>
     <h2>Contacts list:</h2>
 
-    <p>No contacts</p>
+    <?php if (count($contacts) > 0) { ?>
+        <table class="table">
+            <?php foreach ($contacts as $contact) { ?>
+                <tr>
+                    <th scope="row"><?= $contact['name'] ?></th>
+                    <td><?= $contact['email'] ?></td>
+                    <td><?= $contact['phone'] ?></td>
+                    <td><?= $contact['address'] ?></td>
+                    <td class="d-flex flex-column">
+                        <a href="#">Edit</a>
+                        <a href="#">Delete</a>
+                    </td>
+                </tr>
+            <?php } ?>
+        </table>
+    <?php } else { ?>
+        <p>No contacts</p>
+    <?php } ?>
 </section>
 <section>
     <h2>Add contact:</h2>
