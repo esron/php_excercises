@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Components;
 
+use Handlers\Contacts;
 use Handlers\Handler;
 use Handlers\Login;
 use Handlers\Logout;
@@ -26,6 +27,8 @@ class Router
                 return new Logout();
             case '/support':
                 return new Support();
+            case '/contacts':
+                return new Contacts();
             case '/':
                 return new class extends Handler
                 {
