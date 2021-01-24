@@ -27,7 +27,17 @@ class Router
             case '/support':
                 return new Support();
             case '/':
-                return null;
+                return new class extends Handler
+                {
+                    public function handle(): string
+                    {
+                        if (isset($_SESSION['username'])) {
+                            $this->requestRedirect('/profile');
+                        }
+
+                        return (new Template('home'))->render();
+                    }
+                };
             default:
                 return new class extends Handler
                 {
