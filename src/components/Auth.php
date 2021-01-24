@@ -9,7 +9,7 @@ use Models\User;
 
 class Auth
 {
-    public static function isAuthenticated(): bool
+    public static function userIsAuthenticated(): bool
     {
         return isset($_SESSION['userId']);
     }
