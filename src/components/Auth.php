@@ -32,6 +32,7 @@ class Auth
         $_SESSION['userId'] = $id;
         $_SESSION['loginTime'] = time();
     }
+
     public static function logout()
     {
         if (session_status() === PHP_SESSION_ACTIVE) {
