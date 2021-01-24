@@ -7,14 +7,16 @@ namespace Components;
 class Database
 {
     private $pdo;
-    private $dsn = 'mysql:host=127.0.0.1;port=3306;dbname=php_exercises;charset=utf8mb4';
-    private $options = [
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    ];
 
     private function __construct()
     {
-        $this->pdo = new PDO($this->dsn, 'php-user', 'php-pass', $this->options);
+        $dsn = 'mysql:host=127.0.0.1;port=3306;dbname=php_exercises;charset=utf8mb4';
+
+        $options = [
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        ];
+
+        $this->pdo = new PDO($dsn, 'php-user', 'php-pass', $options);
     }
 
     public static function instance()
