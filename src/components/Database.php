@@ -30,8 +30,14 @@ class Database
         return $instance;
     }
 
-    public function getPdo()
+    public function addUser(string $username, string $password): PDOStatement
     {
-        return $this->pdo;
+        $stmt = $this->pdo->prepare("INSERT INTO users ('username', 'password') values (:user, :pass)");
+
+        $stmt->execute([
+            ':user' => $username, ':pass' => password_hash($password, PASSWORD_BCRYPT),
+        ]);
+
+        return $stmt;
     }
 }
