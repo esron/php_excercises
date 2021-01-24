@@ -40,4 +40,29 @@ class Database
 
         return $stmt;
     }
+
+    public function getUserByUsername(string $formUsername): ?User
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE username =:username");
+
+        if ($stmt->execute([':username' => $formUsername]) && ($data =
+            $stmt->fetch(PDO::FETCH_ASSOC))) {
+            return new User($data);
+        }
+
+        return null;
+    }
+
+    public function getUserById(int $id): ?User
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE id = :id");
+
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+        if ($stmt->execute() && ($data = $stmt->fetch(PDO::FETCH_ASSOC))) {
+            return new User($data);
+        }
+
+        return null;
+    }
 }
