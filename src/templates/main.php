@@ -19,6 +19,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/support">Support</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contacts">Contacts</a>
+                    </li>
                 <?php } else { ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/">Home</a>
