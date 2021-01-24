@@ -22,9 +22,11 @@ class Database
     public static function instance()
     {
         static $instance;
+
         if (is_null($instance)) {
             $instance = new static;
         }
+
         return $instance;
     }
 
