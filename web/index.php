@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 session_start();
 
+require_once __DIR__ . '/../src/models/User.php';
 require_once __DIR__ . '/../src/components/Database.php';
 require_once __DIR__ . '/../src/components/Auth.php';
 require_once __DIR__ . '/../src/components/Router.php';
