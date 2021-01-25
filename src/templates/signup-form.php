@@ -25,10 +25,10 @@
 
         <div class="form-label-group mb-3">
             <label for="inputPasswordVerify">Password verify</label>
-            <input type="password" name="password" id="inputPasswordVerify" placeholder="Password verify"
+            <input type="password" name="password_verify" id="inputPasswordVerify" placeholder="Password verify"
                    class="form-control <?= isset($formError['password_verify']) ? 'is-invalid' : ''; ?>">
-            <?php if (isset($formError['password'])) {
-                echo sprintf('<div class="invalid-feedback">%s</div>', htmlentities($formError['password']));
+            <?php if (isset($formError['password_verify'])) {
+                echo sprintf('<div class="invalid-feedback">%s</div>', htmlentities($formError['password_verify']));
             } ?>
         </div>
 
