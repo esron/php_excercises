@@ -4,17 +4,17 @@
 <section>
     <h2>Contacts list:</h2>
 
-    <?php if (count($contacts) > 0) { ?>
+    <?php if ($contacts->rowCount() > 0) { ?>
         <table class="table">
-            <?php foreach ($contacts as $contact) { ?>
+            <?php while ($contact = $contacts->fetch()) { ?>
                 <tr>
                     <th scope="row"><?= $contact['name'] ?></th>
                     <td><?= $contact['email'] ?></td>
                     <td><?= $contact['phone'] ?></td>
                     <td><?= $contact['address'] ?></td>
                     <td class="d-flex flex-column">
-                        <a href="#">Edit</a>
-                        <a href="#">Delete</a>
+                        <a href="/contacts?edit=<?= $contact['id'] ?>">Edit</a>
+                        <a href="/contacts?delete=<?= $contact['id'] ?>">Delete</a>
                     </td>
                 </tr>
             <?php } ?>
@@ -25,24 +25,57 @@
 </section>
 <section>
     <h2>Add contact:</h2>
-    <form action="/contact" method="post">
+    <form action="/contacts" method="post">
         <div class="form-row">
+            <input type="hidden" name="id" value="<?= htmlentities($formData['id'])?>">
             <div class="form-group col-md-6">
                 <label for="inputName">Name</label>
-                <input type="text" class="form-control" id="inputName" placeholder="Enter name">
+                <input
+                    type="text"
+                    class="form-control <?= isset($formError['name']) ? 'is-invalid' : ''; ?>"
+                    name="name"
+                    id="inputName"
+                    placeholder="Enter name"
+                    value="<?= htmlentities($formData['name']) ?>"
+                >
+                <?php if (isset($formError['name'])) {
+                    echo sprintf('<div class="invalid-feedback">%s</div>', htmlentities($formError['name']));
+                } ?>
             </div>
             <div class="form-group col-md-6">
                 <label for="inputPhone">Phone</label>
-                <input type="text" class="form-control" id="inputPhone" placeholder="Enter phone">
+                <input
+                    type="text"
+                    class="form-control"
+                    name="phone"
+                    id="inputPhone"
+                    placeholder="Enter phone"
+                    value="<?= htmlentities($formData['phone']) ?>"
+                >
             </div>
         </div>
         <div class="form-group">
             <label for="inputEmail">Email</label>
-            <input type="email" class="form-control" id="inputEmail" placeholder="Enter email"></textarea>
+            <input
+                type="email"
+                class="form-control <?= isset($formError['email']) ? 'is-invalid' : ''; ?>"
+                id="inputEmail"
+                name="email"
+                placeholder="Enter email"
+                value="<?= htmlentities($formData['email']) ?>"
+            >
+            <?php if (isset($formError['email'])) {
+                echo sprintf('<div class="invalid-feedback">%s</div>', htmlentities($formError['email']));
+            } ?>
         </div>
         <div class="form-group">
             <label for="inputAddress">Address</label>
-            <textarea class="form-control" id="inputAddress" placeholder="1234 Main St"></textarea>
+            <textarea
+                class="form-control"
+                id="inputAddress"
+                name="address"
+                placeholder="1234 Main St"
+            ><?= htmlentities($formData['address']) ?></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Save</button>
     </form>
