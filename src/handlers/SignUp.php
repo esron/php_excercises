@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Handlers;
 
+use Components\Auth;
+use Components\Database;
+
 class SignUp extends Handler
 {
     public function handle(): string
@@ -13,40 +16,56 @@ class SignUp extends Handler
             return '';
         }
 
-        $users = [
-            'admin' => [
-                'passwordHash' => '$2y$10$Y09UvSz2tQCw/454Mcuzzuo8ARAjzAGGf8OPGeBloO7j47Fb2v.lu', // 'admin' hash
-                'level' => 'VIP',
-            ],
-            'john' => [
-                'passwordHash' => '$2y$10$GTNLIHbPT2PMBZ6ReNgZNuU1g4jL2bo9UZp2O1ONIuYEXJs/7XH5m',
-                // '123456' hash
-                'level' => 'standard',
-            ],
-        ];
-
         $formError = [];
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $formUsername = $_POST['username'] ?? '';
-            $formPassword = $_POST['password'] ?? '';
+            $formError = $this->handleSignUp();
 
-            if (!key_exists($formUsername, $users)) {
-                $formError = ['username' => sprintf('The username [%s] was not found.', $formUsername)];
-            } elseif (!password_verify($formPassword, $users[$formUsername]['passwordHash'])) {
-                $formError = ['password' => 'The provided password is invalid.'];
-            } else {
-                $_SESSION['username'] = $formUsername;
-                $_SESSION['userLevel'] = $users[$formUsername]['level'];
-                $_SESSION['loginTime'] = date(\DATE_COOKIE);
-
-                $this->requestRedirect('/profile');
+            if ($formError === null) {
                 return '';
             }
         }
 
         return (new \Components\Template('signup-form'))->render([
             'formError' => $formError,
-            'formUsername' => $formUsername ?? '',
+            'formUsername' => $_POST['username'] ?? '',
         ]);
+    }
+
+    public function handleSignUp(): ?array
+    {
+        $formError = null;
+
+        $formUsername = trim($_POST['username'] ?? '');
+
+        $formPassword = trim($_POST['password'] ?? '');
+
+        $formPasswordVerify = trim($_POST['password_verify'] ?? '');
+
+        if (!$formUsername || strlen($formUsername) < 3) {
+            $formError = ['username' => 'Please enter an username of at least 3 characters.'];
+        } elseif (!ctype_alnum($formUsername)) {
+            $formError = ['username' => 'The username should contain only numbers and letters.'];
+        }
+
+        if (!$formPassword) {
+            $formError = ['password' => 'Please enter a password of at least 6 characters.'];
+        } elseif ($formPassword !== $formPasswordVerify) {
+            $formError = ['password' => 'The passwords doesn\'t match.'];
+        }
+
+        if (!$formError) {
+            $stmt = Database::instance()->addUser(strtolower($formUsername), $formPassword);
+
+            if (!$stmt->rowCount()) {
+                list(,, $error) = $stmt->errorInfo();
+                $formError = ['username' => $error];
+            } else {
+                Auth::authenticate((int)Database::instance()->getPdo()->lastInsertId());
+                $this->requestRedirect('/profile');
+            }
+        }
+
+        return $formError;
     }
 }
