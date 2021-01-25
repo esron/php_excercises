@@ -109,7 +109,7 @@ class Database
         string $phone,
         string $address
     ): PDOStatement {
-        $stmt = $this->pdo->prepare("INSERT INTO contacts (user_id, 'name', phone, email, address)"
+        $stmt = $this->pdo->prepare("INSERT INTO contacts (user_id, name, phone, email, address)"
             . " VALUES (:uid, :name, :phone, :email, :address)");
 
         $stmt->bindParam(':uid', $ownerId, PDO::PARAM_INT);
@@ -136,7 +136,7 @@ class Database
         string $address
     ): PDOStatement {
         $stmt = $this->pdo->prepare(
-            "UPDATE contacts SET 'name' = :name, phone = :phone, email = :email, address = :address"
+            "UPDATE contacts SET name = :name, phone = :phone, email = :email, address = :address"
                 . " WHERE id = :cid and user_id = :uid"
         );
 
