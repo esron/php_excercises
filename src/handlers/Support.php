@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Handlers;
 
+use Components\Auth;
+
 class Support extends Handler
 {
     public function handle(): string
     {
-        if (!array_key_exists('username', $_SESSION)) {
+        if (!Auth::userIsAuthenticated()) {
             return (new Login)->handle();
         }
 
@@ -28,7 +30,7 @@ class Support extends Handler
         }
 
         return (new \Components\Template('support'))->render([
-            'username'  => $_SESSION['username'],
+            'username'  => Auth::getUser()->getUsername(),
             'formName'  => $formName  ?? '',
             'formEmail' => $formEmail ?? '',
             'formError' => $formErrors ?? null,
