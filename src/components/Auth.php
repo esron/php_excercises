@@ -22,8 +22,9 @@ class Auth
     public static function getUser(): ?User
     {
         if (self::userIsAuthenticated()) {
-            return Database::getUserById((int)$_SESSION['userid']);
+            return Database::instance()->getUserById((int)$_SESSION['userId']);
         }
+
         return null;
     }
 
