@@ -25,9 +25,15 @@
 </section>
 <section>
     <h2>Add contact:</h2>
+
+    <?php if (isset($formError['csrf-token'])) { ?>
+        <div class="alert alert-danger" role="alert"><?= $formError['csrf-token']; ?></div>
+    <?php } ?>
+
     <form action="/contacts" method="post">
         <div class="form-row">
             <input type="hidden" name="id" value="<?= htmlentities($formData['id'])?>">
+            <input type="hidden" name="csrf-token" value="<?= $formCsrfToken ?>">
             <div class="form-group col-md-6">
                 <label for="inputName">Name</label>
                 <input
