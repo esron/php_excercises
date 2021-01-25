@@ -1,3 +1,4 @@
+<?php use Components\Auth; ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,7 +13,7 @@
 
         <div class="collapse navbar-collapse show">
             <ul class="navbar-nav mr-auto">
-                <?php if (isset($_SESSION['username'])) { ?>
+                <?php if (Auth::userIsAuthenticated()) { ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/profile">Profile</a>
                     </li>
@@ -28,7 +29,7 @@
                     </li>
                 <?php } ?>
             </ul>
-            <?php if (isset($_SESSION['username'])) { ?>
+            <?php if (Auth::userIsAuthenticated()) { ?>
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Logout</a>
@@ -46,17 +47,9 @@
     <main class="container">
         <?php if (isset($content)) {
             echo $content;
-        } else { ?>
-            <div class="jumbotron">
-                <h1 class="display-4">Hello!</h1>
-                <p class="lead">
-                    <a href="/signup">Sign up</a> to start creating your contacts list.
-                </p>
-                <p>
-                    Already have an account? <a href="/login">Login here</a>.
-                </p>
-            </div>
-        <?php } ?>
+        } else {
+            echo (new \Components\Template('home'))->render();
+        } ?>
     </main>
 </body>
 </html>
