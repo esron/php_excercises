@@ -8,7 +8,7 @@ class Login extends Handler
 {
     public function handle(): string
     {
-        if (isset($_SESSION['username'])) {
+        if (Auth::userIsAuthenticated()) {
             $this->requestRedirect('/profile');
             return '';
         }
