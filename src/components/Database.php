@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Components;
 
+use PDO;
+use PDOStatement;
+
 class Database
 {
     private $pdo;
@@ -30,9 +33,14 @@ class Database
         return $instance;
     }
 
+    public function getPdo(): PDO
+    {
+        return $this->pdo;
+    }
+
     public function addUser(string $username, string $password): PDOStatement
     {
-        $stmt = $this->pdo->prepare("INSERT INTO users ('username', 'password') values (:user, :pass)");
+        $stmt = $this->pdo->prepare("INSERT INTO users (username, password) values (:user, :pass)");
 
         $stmt->execute([
             ':user' => $username, ':pass' => password_hash($password, PASSWORD_BCRYPT),
