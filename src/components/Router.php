@@ -34,7 +34,7 @@ class Router
                 {
                     public function handle(): string
                     {
-                        if (isset($_SESSION['username'])) {
+                        if (Auth::userIsAuthenticated()) {
                             $this->requestRedirect('/profile');
                         }
 
