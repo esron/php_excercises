@@ -32,7 +32,7 @@ class SignUp extends Handler
         ]);
     }
 
-    public function handleSignUp(): ?array
+    private function handleSignUp(): ?array
     {
         $formError = null;
 
