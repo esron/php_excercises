@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center">
-    <form method="post" action="/login" style="width: 100%; max-width: 420px;">
+    <form method="post" action="/signup" style="width: 100%; max-width: 420px;">
         <div class="text-center mb-4">
             <h1 class="h3 my-4 font-weight-normal">Sign Up</h1>
         </div>
