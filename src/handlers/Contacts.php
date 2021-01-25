@@ -45,15 +45,31 @@ class Contacts extends Handler
         }
 
         return (new \Components\Template('contacts'))->render([
+            'formCsrfToken' => $this->getCsrfToken(),
             'formData' => $formData,
             'formError' => $formError,
             'contacts' => $contacts,
         ]);
     }
 
+    private function getCsrfToken(): string
+    {
+        if (!isset($_SESSION['csrf-token'])) {
+            $_SESSION['csrf-token'] = bin2hex(random_bytes(32));
+        }
+
+        return $_SESSION['csrf-token'];
+    }
+
     private function processForm(): ?array
     {
         $formError = null;
+
+        if (!isset($_POST['csrf-token'])
+            || $_POST['csrf-token'] !== $this->getCsrfToken()
+        ) {
+            return ['csrf-token' => 'Invalid token, please refresh the page and try again.'];
+        }
 
         $formName = trim($_POST['name'] ?? '');
         $formEmail = trim($_POST['email'] ?? '');
