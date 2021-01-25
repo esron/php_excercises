@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center">
-    <form method="post" action="/login" style="width: 100%; max-width: 420px;">
+    <form method="post" action="/signup" style="width: 100%; max-width: 420px;">
         <div class="text-center mb-4">
-            <h1 class="h3 my-4 font-weight-normal">Authenticate</h1>
+            <h1 class="h3 my-4 font-weight-normal">Sign Up</h1>
         </div>
 
         <div class="form-label-group mb-3">
@@ -23,8 +23,17 @@
             } ?>
         </div>
 
-        <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+        <div class="form-label-group mb-3">
+            <label for="inputPasswordVerify">Password verify</label>
+            <input type="password" name="password_verify" id="inputPasswordVerify" placeholder="Password verify"
+                   class="form-control <?= isset($formError['password_verify']) ? 'is-invalid' : ''; ?>">
+            <?php if (isset($formError['password_verify'])) {
+                echo sprintf('<div class="invalid-feedback">%s</div>', htmlentities($formError['password_verify']));
+            } ?>
+        </div>
 
-        <p class="mt-3">No account? <a href="/signup">Sign up here</a></p>
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Sign Up</button>
+
+        <p class="mt-3">Already have an account? <a href="/login">Login here</a>.</p>
     </form>
 </div>

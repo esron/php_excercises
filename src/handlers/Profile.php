@@ -4,17 +4,22 @@ declare(strict_types=1);
 
 namespace Handlers;
 
+use Components\Auth;
+
 class Profile extends Handler
 {
     public function handle(): string
     {
-        if (!array_key_exists('username', $_SESSION)) {
+        if (!Auth::userIsAuthenticated()) {
             return (new Login)->handle();
         }
 
+        $user = Auth::getUser();
+
         return (new \Components\Template('profile'))->render([
-            'username' => $_SESSION['username'],
-            'sessionData' => var_export($_SESSION, true)
+            'username' => $user->getUsername(),
+            'signUpDate' => $user->getSignupTime()->format(DATE_RSS),
+            'loginTime' => Auth::getLastLogin()->format(DATE_RSS),
         ]);
     }
 
